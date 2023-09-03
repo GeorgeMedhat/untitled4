@@ -51,59 +51,68 @@ Future<void>getData () async {
     else
     return Scaffold(
         backgroundColor: CupertinoColors.black,
-        body: SafeArea(
-          child: Column(
+        body:  SafeArea(
+            child: Column(
 
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height/10,),
-              Row(
-                children: [
-                  SizedBox(width:  MediaQuery.of(context).size.width/20,),
-                  Text("Most selling",style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white
-                  ),)
-                ],
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height/30,),
-              Expanded(child: MostSelling(products)),
-
-              SizedBox(height: MediaQuery.of(context).size.height/30,),
-              Row(
-                children: [
-                  SizedBox(width:  MediaQuery.of(context).size.width/20,),
-                  Text("All Products",style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                      color: Colors.white
-                  ),)
-                ],
-              ),
-              Expanded(
-                child: GridView.builder(
-
-                  clipBehavior: Clip.none,
-
-                  padding: EdgeInsets.all(8),
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12.0,
-                      mainAxisExtent: 300,
-                      mainAxisSpacing: 12.0
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        SizedBox(height: MediaQuery.of(context).size.height/10,),
+                        Row(
+                          children: [
+                            SizedBox(width:  MediaQuery.of(context).size.width/20,),
+                            Text("Most selling",style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white
+                            ),)
+                          ],
+                        ),
+                        SizedBox(height: MediaQuery.of(context).size.height/30,),
+                        Expanded(child: MostSelling(products)),
+                      ],
+                    ),
                   ),
-                  itemCount: products.length,
-                  itemBuilder: (_,index){
-                    return GridTile(child: ProductContainer(products[index]));
-                  },
                 ),
-              ),
-            ],
+
+
+                SizedBox(height: MediaQuery.of(context).size.height/30,),
+                Row(
+                  children: [
+                    SizedBox(width:  MediaQuery.of(context).size.width/20,),
+                    Text("All Products",style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.white
+                    ),)
+                  ],
+                ),
+                Expanded(
+                  child: GridView.builder(
+
+                    clipBehavior: Clip.hardEdge,
+
+                    padding: EdgeInsets.all(8),
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12.0,
+                        mainAxisExtent: 300,
+                        mainAxisSpacing: 12.0
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (_,index){
+                      return GridTile(child: ProductContainer(products[index]));
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      );
+        );      ;
   }
 
 }
