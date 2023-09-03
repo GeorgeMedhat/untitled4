@@ -4,6 +4,7 @@ import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled4/Data/dio_helper.dart';
+import 'package:untitled4/Most%20selling.dart';
 import 'package:untitled4/productContainer.dart';
 import 'package:untitled4/settings.dart';
 import 'cart.dart';
@@ -28,62 +29,81 @@ class HomeScreenState extends State<HomeScreen>{
   List <Product>products = [];
 void initState(){
   super.initState();
+  print("object");
   getData();
 }
 Future<void>getData () async {
   List productslist = await DioHelper().getProducts();
   products = Product.convertToProduct(productslist);
-  setState(() {
-
-  });
+  setState(() {});
 }
-
-
-
-  List<ProductContainer> list =[];
+//felgeb
   @override
   Widget build(BuildContext context) {
-    for (var product in products)
-    list.add(ProductContainer(product));
   print(products.length);
+  if(products.length==0){
     return Scaffold(
+      backgroundColor: CupertinoColors.black,
 
-      body:Scaffold(
+      body:Center(child: CircularProgressIndicator(color: Colors.green,)) ,
+    );
+  }
+    else
+    return Scaffold(
         backgroundColor: CupertinoColors.black,
-        body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Container(
-            color: Colors.black54,
-            child: Center(
-              child: Column(
+        body: SafeArea(
+          child: Column(
 
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height/10,),
+              Row(
                 children: [
-                  SizedBox(height:  MediaQuery.of(context).size.height/5,),
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    child: GridView.builder(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 12.0,
-                        mainAxisExtent: 300,
-                        mainAxisSpacing: 12.0
-                      ),
-                      itemCount: products.length,
-                      itemBuilder: (_,index){
-                            return ProductContainer(products[index]);
-                      },
-                    ),
-                  ),
-
+                  SizedBox(width:  MediaQuery.of(context).size.width/20,),
+                  Text("Most selling",style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: Colors.white
+                  ),)
                 ],
               ),
-            ),
+              SizedBox(height: MediaQuery.of(context).size.height/30,),
+              Expanded(child: MostSelling(products)),
+
+              SizedBox(height: MediaQuery.of(context).size.height/30,),
+              Row(
+                children: [
+                  SizedBox(width:  MediaQuery.of(context).size.width/20,),
+                  Text("All Products",style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.white
+                  ),)
+                ],
+              ),
+              Expanded(
+                child: GridView.builder(
+
+                  clipBehavior: Clip.none,
+
+                  padding: EdgeInsets.all(8),
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12.0,
+                      mainAxisExtent: 300,
+                      mainAxisSpacing: 12.0
+                  ),
+                  itemCount: products.length,
+                  itemBuilder: (_,index){
+                    return GridTile(child: ProductContainer(products[index]));
+                  },
+                ),
+              ),
+            ],
           ),
         ),
-      )
-    );
+      );
   }
 
 }
