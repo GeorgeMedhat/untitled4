@@ -20,8 +20,8 @@ class ProductContainer extends StatelessWidget{
           )
         ]
       ),
-      width: MediaQuery.of(context).size.width/3,
-      height: MediaQuery.of(context).size.height/10,
+      width: MediaQuery.of(context).size.width/4,
+      height: MediaQuery.of(context).size.height/8,
       child: Column(
         children: [
           ClipRRect(
@@ -37,7 +37,7 @@ class ProductContainer extends StatelessWidget{
             SizedBox(width:  MediaQuery.of(context).size.width/20,),
             Text(product.price.toString(),style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 15
+              fontSize: 18
             ),)
             ,
             Icon(Icons.attach_money_sharp,),

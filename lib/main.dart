@@ -30,7 +30,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-          backgroundColor: Colors.transparent,
+          extendBody: true,
+          resizeToAvoidBottomInset: false,
         bottomNavigationBar: DotNavigationBar(
           splashColor: Colors.black,
             splashBorderRadius: 100,

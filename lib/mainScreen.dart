@@ -51,6 +51,7 @@ Future<void>getData () async {
       body:Scaffold(
         backgroundColor: CupertinoColors.black,
         body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: Container(
             color: Colors.black54,
             child: Center(
@@ -61,7 +62,7 @@ Future<void>getData () async {
                   Container(
                     height: MediaQuery.of(context).size.height,
                     child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: const AlwaysScrollableScrollPhysics(),
                       shrinkWrap: true,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
