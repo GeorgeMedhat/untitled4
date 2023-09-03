@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled4/Data/dio_helper.dart';
 import 'package:untitled4/Most%20selling.dart';
+import 'package:untitled4/allproducts.dart';
 import 'package:untitled4/productContainer.dart';
 import 'package:untitled4/settings.dart';
 import 'cart.dart';
@@ -51,67 +52,44 @@ Future<void>getData () async {
     else
     return Scaffold(
         backgroundColor: CupertinoColors.black,
-        body:  SafeArea(
-            child: Column(
-
-              children: [
-                Expanded(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height/10,),
-                        Row(
-                          children: [
-                            SizedBox(width:  MediaQuery.of(context).size.width/20,),
-                            Text("Most selling",style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.white
-                            ),)
-                          ],
-                        ),
-                        SizedBox(height: MediaQuery.of(context).size.height/30,),
-                        Expanded(child: MostSelling(products)),
-                      ],
-                    ),
-                  ),
-                ),
-
-
-                SizedBox(height: MediaQuery.of(context).size.height/30,),
-                Row(
-                  children: [
-                    SizedBox(width:  MediaQuery.of(context).size.width/20,),
-                    Text("All Products",style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Colors.white
-                    ),)
-                  ],
-                ),
-                Expanded(
-                  child: GridView.builder(
-
-                    clipBehavior: Clip.hardEdge,
-
-                    padding: EdgeInsets.all(8),
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12.0,
-                        mainAxisExtent: 300,
-                        mainAxisSpacing: 12.0
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (_,index){
-                      return GridTile(child: ProductContainer(products[index]));
-                    },
-                  ),
-                ),
-              ],
+        body:  CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).size.height/10,)),
+            SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  SizedBox(width:  MediaQuery.of(context).size.width/20,),
+                  Text("Most selling",style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.white
+                  ),)
+                ],
+              ),
             ),
-          ),
+            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).size.height/30,)),
+            SliverToBoxAdapter(child: SizedBox( height:MediaQuery.of(context).size.height/4,child: MostSelling(products))),
+
+            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).size.height/20,)),
+            SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  SizedBox(width:  MediaQuery.of(context).size.width/20,),
+                  Text("All Products",style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.white
+                  ),)
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: MediaQuery.of(context).size.height/20,),
+
+            ),
+            AllProducts(products),
+          ],
+        )
         );      ;
   }
 
