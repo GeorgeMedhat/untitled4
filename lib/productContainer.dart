@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled4/models/product.dart';
 
+import 'ProductPage.dart';
+
 class ProductContainer extends StatelessWidget{
   Product product;
   ProductContainer(this.product);
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder:(context) => ProductPage(product)));
+      },
       child: Container(
 
         decoration: BoxDecoration(
