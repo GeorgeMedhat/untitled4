@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:untitled4/Data/dio_helper.dart';
 import 'package:untitled4/Most%20selling.dart';
 import 'package:untitled4/allproducts.dart';
-import 'package:untitled4/productContainer.dart';
+import 'package:untitled4/main.dart';
+// import 'package:untitled4/productContainer.dart';
 import 'package:untitled4/settings.dart';
 import 'cart.dart';
 import 'favs.dart';
@@ -27,30 +28,28 @@ class HomeScreen extends StatefulWidget{
 }
 class HomeScreenState extends State<HomeScreen>{
 
-  List <Product>products = [];
-void initState(){
+@override
+  void initState(){
   super.initState();
   print("object");
-  getData();
 }
-Future<void>getData () async {
-  List productslist = await DioHelper().getProducts();
-  products = Product.convertToProduct(productslist);
-  setState(() {});
-}
+
+
+
 //felgeb
   @override
   Widget build(BuildContext context) {
-  print(products.length);
-  if(products.length==0){
-    return Scaffold(
+  print(MyApp.products.length);
+  if(MyApp.products.isEmpty){
+    return const Scaffold(
       backgroundColor: CupertinoColors.black,
 
       body:Center(child: CircularProgressIndicator(color: Colors.green,)) ,
     );
   }
-    else
+    else {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
         backgroundColor: CupertinoColors.black,
         body:  CustomScrollView(
           slivers: [
@@ -59,7 +58,7 @@ Future<void>getData () async {
               child: Row(
                 children: [
                   SizedBox(width:  MediaQuery.of(context).size.width/20,),
-                  Text("Most selling",style: TextStyle(
+                  const Text("Most selling",style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                       color: Colors.white
@@ -68,14 +67,14 @@ Future<void>getData () async {
               ),
             ),
             SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).size.height/30,)),
-            SliverToBoxAdapter(child: SizedBox( height:MediaQuery.of(context).size.height/4,child: MostSelling(products))),
+            SliverToBoxAdapter(child: SizedBox( height:MediaQuery.of(context).size.height/4,child: MostSelling(MyApp.products))),
 
             SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).size.height/20,)),
             SliverToBoxAdapter(
               child: Row(
                 children: [
                   SizedBox(width:  MediaQuery.of(context).size.width/20,),
-                  Text("All Products",style: TextStyle(
+                  const Text("All Products",style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                       color: Colors.white
@@ -87,10 +86,11 @@ Future<void>getData () async {
               child: SizedBox(height: MediaQuery.of(context).size.height/20,),
 
             ),
-            AllProducts(products),
+            AllProducts(MyApp.products),
           ],
         )
-        );      ;
+        );
+  }
   }
 
 }
