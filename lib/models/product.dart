@@ -1,7 +1,10 @@
 import 'dart:core';
-import 'dart:ui';
+
+import 'package:flutter/material.dart';
 
 class Product {
+ bool isFav=false ;
+  Color favColor = Colors.white;
  final dynamic id ;
  final String title;
  final String description;
