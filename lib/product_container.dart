@@ -80,13 +80,9 @@ class _ProductContainerState extends State<ProductContainer> {
                              
                             });
                           },
-                          child: Container(decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.circular(5)),
-                          height: MediaQuery.of(context).size.width*.07,
-                          width:  MediaQuery.of(context).size.width*.08,
-                            child: Icon(
-                              Icons.favorite,
-                              color:widget.product.favColor,
-                            ),
+                          child: Icon(
+                            Icons.favorite,
+                            color:widget.product.favColor,
                           )),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 20,

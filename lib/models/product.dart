@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Product {
  bool isFav=false ;
-  Color favColor = Colors.white;
+  Color favColor = const Color.fromARGB(137, 152, 152, 152);
  final dynamic id ;
  final String title;
  final String description;
