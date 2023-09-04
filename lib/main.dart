@@ -37,21 +37,11 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-  widget.controller?.addListener(listen);
   getData();
   }
   
 @override
-  void dispose(){
-    super.dispose();
-    widget.controller?.removeListener(listen);
-  }
-  void listen(){
-    final direction = widget.controller?.position.userScrollDirection;
-  }
-  void show(){
-    
-  }
+
   void hide(){}
   Future<void>getData () async {
   List productslist = await DioHelper().getProducts();

@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:untitled4/const.dart';
 import 'package:untitled4/models/product.dart';
 
+import 'ProductPage.dart';
 import 'favs.dart';
 
 class ProductContainer extends StatefulWidget {
   Product product;
-  ProductContainer(this.product, {super.key});
+  ProductContainer(this.product);
 
   @override
-  State<ProductContainer> createState() => _ProductContainerState();
+  State<ProductContainer> createState() => _ProductContainerState(product);
 }
 
 class _ProductContainerState extends State<ProductContainer> {
+  Product product;
+  _ProductContainerState(this.product);
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder:(context) => ProductPage(product)));
+      },
       child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
