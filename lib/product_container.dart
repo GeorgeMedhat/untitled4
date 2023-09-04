@@ -81,7 +81,7 @@ class _ProductContainerState extends State<ProductContainer> {
                               }else if(widget.product.isFav == true){
                                 widget.product.isFav = false;
                               Favorites.favProducts.remove(widget.product);
-                              widget.product.favColor = Colors.white;
+                              widget.product.favColor =  const Color.fromARGB(137, 152, 152, 152);
                               }
                              
                             });
